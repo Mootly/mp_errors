@@ -1,7 +1,10 @@
 <?php
 /**
   * Basic error reporting methods for objects.
-  * Recommended storage/return format for responses (array):
+  *
+  * Store error messages in an array as a pop stack.
+  *
+  * Use the following storage/return format for responses (array):
   * - success       bool    - Was the last call successful?
   * - code          string  - Status code
   * - source        string  - Source of status code.
@@ -11,18 +14,19 @@
   * Code, severity and message come from the $status array.
   * $status[code] = [severity, message]
   *
-  * Source comes from calling method:
+  * Source set by calling object/method:
   * Preferred format for source is use a pseudo-namespace.
-  * Core objects use class + instance count + method
+  * MoosePlum objects use class + instance count + method
   * e.g. mpc_errors_1::getStatus
-  * Code is as follows:
+  * MoosePlum code for unique instance names is as follows:
   * __construct()   - $this->iName  = get_class().'_'.self::$iCount++;
   * calling methods - $tMethod      = $this->iName.'::'.__METHOD__;
   *
   * @copyright 2021-2022 Mootly Obviate
   * @package   mooseplum
+  * @version   1.0.0
   * --- Revision History ------------------------------------------------------ *
-  * 2022-01-01 | New version.
+  * 2022-07-01 | New PHP 8.0 version ready.
   * --------------------------------------------------------------------------- */
 interface mpi_errors {
   # *** BEGIN setStatus ------------------------------------------------------- *
@@ -40,9 +44,10 @@ interface mpi_errors {
 /**
   * Return status message.
   * If storing past messages add optional parameter to specify which to return,
-  * otherwise return the last status code.
-  * Use string parameter since this allows keywords and numeric values.
-  * Remember to only update the status array on error, not on success.
+  * otherwise return the most recent status.
+  * Return false if asking for an out of bounds element.
+  * Remember to only update the status array on error or other noteworth event.
+  * Do not update status on success except for major application milestones.
   *
   * @param int      $pWhich   Which status message to return from the stack.
   * @return array|bool

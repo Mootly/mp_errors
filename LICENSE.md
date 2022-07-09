@@ -1,6 +1,6 @@
 # MoosePlum Class Library License
 
-## MoosePlum Error Management Class v. 1.0
+## MoosePlum Error Management Class
 
 Copyright (c) 2017-2022 Mootly Obviate
 

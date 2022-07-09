@@ -1,7 +1,7 @@
 <?php
 /**
   * Manage error message handling for objects and applications.
-  * Implements mpi_errors.
+  * Implements mpi_errors which see for detailed description.
   *
   * Public Properties:
   *   None.
@@ -11,13 +11,14 @@
   * @method bool              setStatus(string, string)
   * @method array|bool        getStatus(int)
   * @method array             getStatusCodes()
-  * @method array             getStatusCount()
+  * @method int               getStatusCount()
   * @method bool              addStatusCodes(array, bool)
   *
   * @copyright 2017-2022 Mootly Obviate
   * @package   mooseplum
+  * @version   1.0.0
   * --- Revision History ------------------------------------------------------ *
-  * 2022-01-01 | New version.
+  * 2022-07-01 | New PHP 8.0 version ready.
   * --------------------------------------------------------------------------- */
 class mpc_errors implements mpi_errors {
   protected $iName;

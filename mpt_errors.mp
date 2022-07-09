@@ -45,6 +45,10 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <body>
 <h1><code>mpc_errors</code> Test Page</h1>
 
+<p>Not fancy, but found plenty of edge cases.</p>
+
+<p>Last updated: JUly 1, 2022</p>
+
 <h2>Sections</h2>
 
 <p>Many of the tests of other methods will already occur during instantiation. Especially the addStatusCodes.</p>
