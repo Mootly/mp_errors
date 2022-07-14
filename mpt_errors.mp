@@ -1,8 +1,9 @@
 <?php
 $fileList = glob('./*');
 echo '<pre>', var_export($fileList),'</pre>';
-require_once './mpi_errors.php';
-require_once './mpc_errors.php';
+require_once './src/mpi_errors.php';
+require_once './src/mpc_errors.php';
+$mpo_errors = new \mpc\mpc_errors();
 function printResults($p_errObj) {
   $tCount = $p_errObj->getStatusCount();
   echo '<table class="error-report">';
@@ -93,7 +94,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <h3>Test 1.1: No Arguments</h3>
 <?php
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors();
+  $mpo_errors       = new \mpc\mpc_errors();
   printResults($mpo_errors);
 ?>
 
@@ -101,7 +102,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array = ['techno' => ['Notice' ,'Best Success 1.2.']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -111,7 +112,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
               'techno1' => ['Notice' ,'Bestest Success.'],
               'techno2' => ['Notice' ,'Even Bester Success.']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -123,7 +124,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_nonarray       = 'techno';
   $mpo_errors       = false;
-  try { $mpo_errors = new mpc_errors($t_nonarray);
+  try { $mpo_errors = new \mpc\mpc_errors($t_nonarray);
 } catch(Throwable $e) { printError($e, 'Error 1: '); }
   echo '<br />';
   try { printResults($mpo_errors);
@@ -134,7 +135,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array          = ['none' => 'Notice'];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -142,7 +143,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array          = ['none', 'Notice'];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -150,7 +151,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array          = ['techno' => ['Notice' ,'Best Success 1.7.', 'Worst Sucess 1.7']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -159,7 +160,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   $t_array = ['techno' => ['Notice' ,'Best Success 1.8.', 'Worst Sucess 1.8'],
               'techno2' => ['Notice' ,'Bester Success.']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -168,7 +169,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   $t_array = ['techno' => ['Notice' ,'Best Success 1.9.'],
               'techno2' => ['Notice']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -176,7 +177,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array = ['none' => ['Notice', ['Notice' ,'Best Success 1.10.']]];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -184,7 +185,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array = ['none' => ['Notice' ,'Best Success.']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array);
+  $mpo_errors       = new \mpc\mpc_errors($t_array);
   printResults($mpo_errors);
 ?>
 
@@ -193,7 +194,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <?php
   $t_array = ['none' => ['Notice'  ,'Best Success.']];
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors($t_array, true);
+  $mpo_errors       = new \mpc\mpc_errors($t_array, true);
   printResults($mpo_errors);
 ?>
 </pre>
@@ -202,7 +203,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <pre>
 <?php
   $mpo_errors       = false;
-  $mpo_errors       = new mpc_errors(NULL, false, 5);
+  $mpo_errors       = new \mpc\mpc_errors(NULL, false, 5);
   for ($x=0; $x<6; $x++) { $t_stat = $mpo_errors->setStatus('noob'); }
   printResults($mpo_errors);
 ?>
@@ -221,7 +222,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 
 <?php
   $mpo_errors = false;
-  $mpo_errors = new mpc_errors();
+  $mpo_errors = new \mpc\mpc_errors();
 ?>
 <h3>Test 2.1: Set with no arguments</h3>
 <p class="alert">Fatal error.</p>
@@ -343,7 +344,7 @@ echo '<br />' ;
 
 <?php
   $mpo_errors = false;
-  $mpo_errors = new mpc_errors();
+  $mpo_errors = new \mpc\mpc_errors();
 ?>
 
 <h3>Test 4.1: Get status list with no arguments</h3>
@@ -405,7 +406,7 @@ echo '<br />' ;
 
 <?php
   $mpo_errors = false;
-  $mpo_errors = new mpc_errors();
+  $mpo_errors = new \mpc\mpc_errors();
 ?>
 
 <h3>Test 6.1: Invalid duplicate flag (string).</h3>
@@ -423,7 +424,7 @@ echo '<br />' ;
 
 <?php
   $mpo_errors = false;
-  $mpo_errors = new mpc_errors();
+  $mpo_errors = new \mpc\mpc_errors();
 ?>
 
 <h3>Test 6.2: Invalid duplicate flag (array).</h3>

@@ -14,7 +14,7 @@ None.
 
 ## Defaults
 
-The default namespace for this class is `mootly::mp_errors`.
+The default namespace for this class is `mpc`.
 
 The default location should be your vendor library. For inclusion with other MoosePlum stuff that would be `/_lib/mootly/mp_errors/`.
 

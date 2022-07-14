@@ -17,6 +17,6 @@
       "php"         : ">=8.0.0"
   },
   "autoload": {
-    "psr-4": { "mootly\\": "mootly/" }
+    "psr-4": { "mpc\\": "src/" }
  }
 }

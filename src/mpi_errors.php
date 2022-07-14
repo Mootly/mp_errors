@@ -28,7 +28,8 @@
   * --- Revision History ------------------------------------------------------ *
   * 2022-07-01 | New PHP 8.0 version ready.
   * --------------------------------------------------------------------------- */
-interface mpi_errors {
+  namespace mpc;
+  interface mpi_errors {
   # *** BEGIN setStatus ------------------------------------------------------- *
   /**
   * Set a status message for last action.

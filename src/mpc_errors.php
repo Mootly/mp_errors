@@ -20,6 +20,7 @@
   * --- Revision History ------------------------------------------------------ *
   * 2022-07-01 | New PHP 8.0 version ready.
   * --------------------------------------------------------------------------- */
+namespace mpc;
 class mpc_errors implements mpi_errors {
   protected $iName;
   protected static $iCount = 0;
