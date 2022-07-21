@@ -36,11 +36,12 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   table.error-report th { text-align: left; font-weight: bold; padding: 0.25em; border-bottom: 1px solid #776677; }
   table.error-report td { padding: 0.25em; }
   h3 { margin-top: 3.0em; padding: 0.25em 0.125em 0.125em 0.125em; background-color: #302530; }
-  h2 { margin-top: 1.0em; margin-bottom: 1.0em; padding: 0.25em; background-color: #302530; border: 1px solid #776677; }
+  h2 { margin-top: 2.0em; margin-bottom: 1.0em; padding: 0.5em 0.25em; background-color: #302530; border: 1px solid #776677; }
   a { color: #9999dd; }
   a:visited { color: #dd99dd; }
-  .alert { background-color: #605019; padding-left: 0.5em; padding-right: 0.5em; }
-  .bug   { background-color: #601919; padding-left: 0.5em; padding-right: 0.5em; }
+  .clean { background-color: #196019; padding: 0.125em 0.5em; }
+  .alert { background-color: #605019; padding: 0.125em 0.5em; }
+  .bug   { background-color: #601919; padding: 0.125em 0.5em; }
   </style>
 </head>
 <body>
@@ -50,7 +51,9 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 
 <p>Last updated: JUly 1, 2022</p>
 
-<h2>Sections</h2>
+<!-- ***** TABLE OF CONTENTS ***** -->
+
+<h2 id="toc">Sections</h2>
 
 <p>Many of the tests of other methods will already occur during instantiation. Especially the addStatusCodes.</p>
 
@@ -65,13 +68,19 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   <li><a href="#addStatusCodes">addStatusCodes</a></li>
 </ol>
 
+<!-- ***** DEPENDENCIES ***** -->
+
 <h2 id="dependencies">Dependencies</h2>
 
 <p>None.</p>
 
+<!-- ***** UNEXPECTED BEHAVIORS ***** -->
+
 <h2 id="fix">Unexpected Behaviors</h2>
 
 <p>All cleaned up.</p>
+
+<!-- ***** TEST __construct ***** -->
 
 <h2 id="instantiate">1. Instantiate</h2>
 
@@ -89,16 +98,20 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   <li>Instantiate with array with duplicate element</li>
   <li>Instantiate with array with duplicate element with replacements allowed</li>
   <li>Instantiate with specified history length</li>
+  <li>Instantiate with invalid specified history length - string</li>
+  <li>Instantiate with invalid specified history length - negative integer</li>
 </ol>
 
 <h3>Test 1.1: No Arguments</h3>
+<p class="clean">Good.</p>
 <?php
   $mpo_errors       = false;
   $mpo_errors       = new \mpc\mpc_errors();
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.2: With Array</h3>
+<h3>Test 1.2: With Array - Single Entry</h3>
+<p class="clean">Good.</p>
 <?php
   $t_array = ['techno' => ['Notice' ,'Best Success 1.2.']];
   $mpo_errors       = false;
@@ -106,7 +119,8 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.3: With Array - multiple elements</h3>
+<h3>Test 1.3: With Array - Multiple Entries</h3>
+<p class="clean">Good.</p>
 <?php
   $t_array = ['techno' => ['Notice' ,'Best Success 1.3.'],
               'techno1' => ['Notice' ,'Bestest Success.'],
@@ -117,9 +131,10 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 ?>
 
 <h3>Test 1.4: With Non-Array</h3>
+<p class="alert">Fatal Error. Correct.</p>
 <ul>
-  <li>Error 1: <span class="alert">Fatal error.</span></li>
-  <li>Error 2: Test to make sure object wasn't instantiated.</li>
+  <li>Error 1: Fatal error.</li>
+  <li>Error 2: Object was not instatiated.</li>
 </ul>
 <?php
   $t_nonarray       = 'techno';
@@ -132,6 +147,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 ?>
 
 <h3>Test 1.5: With Malformed Array - Too Shallow</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $t_array          = ['none' => 'Notice'];
   $mpo_errors       = false;
@@ -139,7 +155,8 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.6: With Malformed Array - Missing key value</h3>
+<h3>Test 1.6: With Malformed Array - Missing Key in Entry</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $t_array          = ['none', 'Notice'];
   $mpo_errors       = false;
@@ -147,7 +164,8 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.7: With Malformed Array - Too many values</h3>
+<h3>Test 1.7: With Malformed Array - Too Many Values in Entry</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $t_array          = ['techno' => ['Notice' ,'Best Success 1.7.', 'Worst Sucess 1.7']];
   $mpo_errors       = false;
@@ -155,25 +173,34 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.8: With Malformed Array - Error in first of set</h3>
+<h3>Test 1.8: With Malformed Array - Error in First of Set</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
-  $t_array = ['techno' => ['Notice' ,'Best Success 1.8.', 'Worst Sucess 1.8'],
-              'techno2' => ['Notice' ,'Bester Success.']];
+  $t_array = ['entry1' => ['Notice' ,'Best Success 1.8.', 'Worst Sucess 1.8'],
+              'entry2' => ['Notice' ,'Bester Success.']];
   $mpo_errors       = false;
   $mpo_errors       = new \mpc\mpc_errors($t_array);
+  $t_result         = $mpo_errors->getStatusCodes();
+  printVariables($t_result['entry1']);
+  printVariables($t_result['entry2']);
   printResults($mpo_errors);
 ?>
 
-<h3>Test 1.9: With Malformed Array - Error in last of set</h3>
+<h3>Test 1.9: With Malformed Array - Error in Last of Set</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
-  $t_array = ['techno' => ['Notice' ,'Best Success 1.9.'],
-              'techno2' => ['Notice']];
+  $t_array = ['entry1' => ['Notice' ,'Best Success 1.9.'],
+              'entry2' => ['Notice']];
   $mpo_errors       = false;
   $mpo_errors       = new \mpc\mpc_errors($t_array);
+  $t_result         = $mpo_errors->getStatusCodes();
+  printVariables($t_result['entry1']);
+  printVariables($t_result['entry2']);
   printResults($mpo_errors);
 ?>
 
 <h3>Test 1.10: With Malformed Array - Too Deep</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $t_array = ['none' => ['Notice', ['Notice' ,'Best Success 1.10.']]];
   $mpo_errors       = false;
@@ -182,6 +209,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 ?>
 
 <h3>Test 1.11 With Array - Duplicate Element</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $t_array = ['none' => ['Notice' ,'Best Success.']];
   $mpo_errors       = false;
@@ -190,6 +218,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 ?>
 
 <h3>Test 1.12: With Array - Duplicate Element with Replacements Allowed</h3>
+<p class="clean">Good.</p>
 <pre>
 <?php
   $t_array = ['none' => ['Notice'  ,'Best Success.']];
@@ -198,7 +227,9 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   printResults($mpo_errors);
 ?>
 </pre>
-<h3>Test 1.13: NULL Array - Change status history length (to 5)</h3>
+
+<h3>Test 1.13: NULL Array - Change Status History Length (to 5)</h3>
+<p class="clean">Good.</p>
 <p>Add six errors. Instantiation message will drop off the history.</p>
 <pre>
 <?php
@@ -206,8 +237,33 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   $mpo_errors       = new \mpc\mpc_errors(NULL, false, 5);
   for ($x=0; $x<6; $x++) { $t_stat = $mpo_errors->setStatus('noob'); }
   printResults($mpo_errors);
+  ?>
+</pre>
+
+<h3>Test 1.13: NULL Array - Change Status History Length to Invalid Value - String</h3>
+<p class="alert">Fatal Error. Correct.</p>
+<p>Pass string when integer expected for status log length.</p>
+<pre>
+<?php
+  $mpo_errors       = false;
+  try { $mpo_errors = new \mpc\mpc_errors(NULL, false, 'badval');
+  } catch(Throwable $e) { printError($e, 'Error 1: '); }
 ?>
 </pre>
+
+<h3>Test 1.14: NULL Array - Change Status History Length to Invalid Value - Negative Number</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
+<p>Pass negative number for status log length.</p>
+<pre>
+<?php
+  $mpo_errors       = false;
+  try { $mpo_errors = new \mpc\mpc_errors(NULL, false, -8);
+  } catch(Throwable $e) { printError($e, 'Error 1: '); }
+  printResults($mpo_errors);
+?>
+</pre>
+
+<!-- ***** TEST setStatus ***** -->
 
 <h2 id="setStatus">setStatus</h2>
 
@@ -224,8 +280,9 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   $mpo_errors = false;
   $mpo_errors = new \mpc\mpc_errors();
 ?>
+
 <h3>Test 2.1: Set with no arguments</h3>
-<p class="alert">Fatal error.</p>
+<p class="alert">Fatal Error. Correct.</p>
 <?php
   try { $mpo_errors->setStatus();
 } catch(Throwable $e) { printError($e, 'Error 1: '); }
@@ -235,25 +292,28 @@ echo '<br />' ;
 ?>
 
 <h3>Test 2.2: Set with valid error code, no source</h3>
+<p class="clean">Good.</p>
 <?php
   $mpo_errors->setStatus('none');
   printResults($mpo_errors);
 ?>
 
 <h3>Test 2.3: Set with valid error code and source</h3>
+<p class="clean">Good.</p>
 <?php
-  $mpo_errors->setStatus('mpe_badURL','fake url test');
+  $mpo_errors->setStatus('mpe_badURL','bad url test');
   printResults($mpo_errors);
 ?>
 
 <h3>Test 2.4: Set with invalid valid error code</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <?php
   $mpo_errors->setStatus('invalid_code','invalid code test');
   printResults($mpo_errors);
 ?>
 
 <h3>Test 2.5: Set with invalid data type for error code</h3>
-<p class="alert">Fatal error.</p>
+<p class="alert">Fatal error. Correct.</p>
 <?php
   try { $mpo_errors->setStatus(['a','b'],'invalid type test');
   } catch(Throwable $e) { printError($e, 'Error 1: '); }
@@ -263,7 +323,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 2.6: Set with invalid data type for source</h3>
-<p class="alert">Fatal error.</p>
+<p class="alert">Fatal error. Correct.</p>
 <?php
   try { $mpo_errors->setStatus('none',['a','b']);
   } catch(Throwable $e) { printError($e, 'Error 1: '); }
@@ -271,6 +331,8 @@ echo '<br />' ;
   try { printResults($mpo_errors);
   } catch(Throwable $e) { printError($e, 'Error 12: '); }
 ?>
+
+<!-- ***** TEST getStatus ***** -->
 
 <h2 id="getStatus">getStatus</h2>
 
@@ -285,6 +347,8 @@ echo '<br />' ;
 </ol>
 
 <h3>Test 3.1: Get with no arguments</h3>
+<p class="clean">Good.</p>
+<p>Defaults to most recent error.</p>
 <?php
   $t_result         = $mpo_errors->getStatus();
   printVariables($t_result);
@@ -292,6 +356,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 3.2: Get with valid argument (0)</h3>
+<p class="clean">Good.</p>
 <?php
   $t_result         = $mpo_errors->getStatus(0);
   printVariables($t_result);
@@ -299,6 +364,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 3.3: Get with valid argument (count-1)</h3>
+<p class="clean">Good.</p>
 <?php
   $t_count          = $mpo_errors->getStatusCount();
   $t_result         = $mpo_errors->getStatus($t_count-1);
@@ -307,6 +373,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 3.4: Get with invalid argument (-1)</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <p>Return false. Don't add status messages to the log.</p>
 <?php
   $t_count          = $mpo_errors->getStatusCount();
@@ -316,6 +383,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 3.5: Get with invalid argument (count+1)</h3>
+<p class="clean">Non-Fatal Error. Correct.</p>
 <p>Return false. Don't add status messages to the log.</p>
 <?php
   $t_count          = $mpo_errors->getStatusCount();
@@ -325,7 +393,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 3.6: Get with invalid data type for argument</h3>
-<p class="alert">Fatal error.</p>
+<p class="alert">Fatal error. Correct.</p>
 <?php
   $t_result = 'have not run yet';
   try { $t_result = $mpo_errors->getStatus('steve');
@@ -333,6 +401,8 @@ echo '<br />' ;
   printVariables($t_result);
   printResults($mpo_errors);
 ?>
+
+<!-- ***** TEST getStatusCodes ***** -->
 
 <h2 id="getStatusCodes">getStatusCodes</h2>
 
@@ -348,6 +418,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 4.1: Get status list with no arguments</h3>
+<p class="clean">Good.</p>
 
 <?php
   $t_result         = $mpo_errors->getStatusCodes();
@@ -355,8 +426,17 @@ echo '<br />' ;
   printResults($mpo_errors);
 ?>
 <h3>Test 4.2: Get status list with argument</h3>
-
+<p class="clean">Good.</p>
 <p>No argument expected, so ignore.</p>
+
+<?php
+  $t_result         = $mpo_errors->getStatusCodes('anything');
+  printVariables($t_result);
+  printResults($mpo_errors);
+?>
+
+<h3>Test 4.2: Get status list after addStatusCodes</h3>
+<p class="clean">Good.</p>
 
 <?php
   $t_array = ['techno' => ['Notice' ,'Best Success.'],
@@ -368,7 +448,7 @@ echo '<br />' ;
   printResults($mpo_errors);
 ?>
 
-<h3>Test 4.2: Get status list after addStatusCodes</h3>
+<!-- ***** TEST getStatusCount ***** -->
 
 <h2 id="getStatusCount">GetStatusCount</h2>
 
@@ -378,6 +458,7 @@ echo '<br />' ;
 </ol>
 
 <h3>Test 5.1: Get count with no arguments</h3>
+<p class="clean">Good.</p>
 
 <?php
   $t_result         = $mpo_errors->getStatusCount();
@@ -386,7 +467,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 5.2: Get count with argument</h3>
-
+<p class="clean">Good.</p>
 <p>None expected. Ignore argument.</p>
 
 <?php
@@ -394,6 +475,8 @@ echo '<br />' ;
   printVariables($t_result);
   printResults($mpo_errors);
 ?>
+
+<!-- ***** TEST getStatusCodes ***** -->
 
 <h2 id="addStatusCodes">addStatusCodes</h2>
 
@@ -419,6 +502,8 @@ echo '<br />' ;
               'techno2' => ['Notice' ,'Best Success.']];
   $t_result         = $mpo_errors->addStatusCodes($t_array, 'bad value');
   printVariables($t_result);
+  $t_result         = $mpo_errors->getStatusCodes();
+  printVariables($t_result);
   printResults($mpo_errors);
 ?>
 
@@ -428,8 +513,7 @@ echo '<br />' ;
 ?>
 
 <h3>Test 6.2: Invalid duplicate flag (array).</h3>
-
-<p class="alert">Fatal error.</p>
+<p class="alert">Fatal error. Correct.</p>
 
 <?php
   $t_array = ['techno' => ['Notice' ,'Best Success.'],

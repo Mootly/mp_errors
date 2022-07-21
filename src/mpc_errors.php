@@ -114,7 +114,7 @@ class mpc_errors implements mpi_errors {
 # *** END - getStatusCodes ---------------------------------------------------- *
 #
 #*** BEGIN getStatusCount ----------------------------------------------------- *
- public function getStatusCount() : int { return count($this->eList); }
+  public function getStatusCount() : int { return count($this->eList); }
 # *** END - getStatusCount ---------------------------------------------------- *
 #
 # *** BEGIN addStatusCodes ---------------------------------------------------- *
@@ -138,6 +138,6 @@ class mpc_errors implements mpi_errors {
     }
     return $this->response['success'];
   }
-# *** END - addStatusCodes --------------------------------------------------- *
+# *** END - addStatusCodes ---------------------------------------------------- *
 }
 // End mpc_parts -------------------------------------------------------------- *

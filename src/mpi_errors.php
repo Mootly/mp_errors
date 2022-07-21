@@ -62,7 +62,7 @@
   *
   * @return array|bool
   */
-  public function getStatusCodes() : array|bool;
+  public function getStatusCodes() : array;
 # *** END - getStatusCodes ---------------------------------------------------- *
 #
 # *** BEGIN getStatusCount ---------------------------------------------------- *
