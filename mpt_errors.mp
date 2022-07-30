@@ -57,9 +57,11 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 
 <p>Many of the tests of other methods will already occur during instantiation. Especially the addStatusCodes.</p>
 
-<ol>
+<ul>
   <li><a href="#dependencies">Dependencies</a></li>
   <li><a href="#fix">Unexpected Behaviors</a></li>
+</ul>
+</ol>
   <li><a href="#instantiate">Instantiate</a></li>
   <li><a href="#setStatus">setStatus</a></li>
   <li><a href="#getStatus">getStatus</a></li>

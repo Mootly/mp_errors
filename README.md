@@ -2,17 +2,18 @@
 
 This is a standalone version of the error class used by MoosePlum, for those who want a really simple in-application error logger for their PHP apps.
 
-This is for storing errors that are internal to the application and do not, and in many cases should not, generate system errors.
+This is for logging errors that are internal to the application and do not, and in most cases should not, generate system errors.
 
-The error log is stored internally in an array that defaults to storign the last 100 messages.
+The error log is stored internally in an array that defaults to only storing the last 100 entries.
 
-The class also stores and array of error messages that are to be used in reporting. It starts with a default set that can be added to by calling code or classes.
+The class also stores an array of status messages for ues in reporting. It starts with a default set that can be added to.
 
-It's primary function is to standardize error reporting across all objects in an application.
+The primary function of this class is to standardize error logging across all objects in an application.
 
 ## System Requirements
 
 Requirements are pretty simple.
+
 - This was developed using PHP 8.1. It should work in PHP 7.0 and up, but has **not** been test for backward compatibility.
 - A web server, or what's the point really?
 
@@ -22,7 +23,7 @@ None.
 
 ## Defaults
 
-The default namespace for this class is `mpc`.
+The default namespace for this class is '`mpc`', which is short for 'MoosePlum Class'.
 
 The default location for this class definition should be your vendor library. For inclusion with other MoosePlum stuff that would be `/_lib/mootly/mp_errors/`.
 
@@ -49,7 +50,7 @@ Use your preferred method for including classes in your code.
 
 ### Composer Installation
 
-This class definition is listed on [Packagist](https://packagist.org/users/Mootly/packages/).
+This class definition is listed on [Packagist](https://packagist.org/users/Mootly/packages/) for installation using Composer.
 
 See the [Composer](https://getcomposer.org) website for a directions on how to properly install Composer on your system.
 
@@ -64,7 +65,7 @@ Make sure you have the following listed as required. Adjust version numbers as n
 }
 ```
 
-If necessary for your configuration, make sure you have the following autoload definitions listed. Adjust the first step in the path as needed for the location of your vendor library.
+If necessary for your configuration, make sure you have the following autoload definitions listed in your `composer.json`. Adjust the first step in the path as needed for the location of your vendor library.
 
 ```
 "autoload": {
@@ -74,13 +75,13 @@ If necessary for your configuration, make sure you have the following autoload d
 }
 ```
 
-In your terminal of choice, navigate to the root of your website and run the following command. (Depending on how you installed composer this may be different.)
+In your terminal app of choice, navigate to the root of your website and run the following command. (Depending on how you installed composer, this may be different.)
 
 ```
 composer update
 ```
 
-This should install this class definition and related dependencies in your vendor library and sets up composer to link them into your application.
+This should install this class definition and any related dependencies in your vendor library and sets up composer to link them into your application.
 
 To be safe you can also run the following to rebuild the composer autoloader and make sure your classes are correctly registered.
 
@@ -88,9 +89,9 @@ To be safe you can also run the following to rebuild the composer autoloader and
 composer dump-autoload -o
 ```
 
-Make sure you have the following line in your code before using this class definition. Adjust accordingly based on the location of your vendor library.
+Make sure you have the following line to your page or application initialization code before using this class definition. Adjust accordingly based on the location of your vendor library.
 
-<pre>require_once <var>[site root]</var>.'/_lib/autoload.php';</pre>
+<pre>require_once <var>[site root]</var>.'/<var>[vendor lib]</var>/autoload.php';</pre>
 
 That should be all your need to do to get it up and running.
 
@@ -104,9 +105,9 @@ if (!isset($mpo_errors)) { $mpo_errors  = new \mpc\mpc_errors(); }
 
 The constructor takes three optional arguments.
 
-1. (array) - An array of status codes. See the format below.
-2. (bool) - Whether to allow existing status codes to be replaced or not when the code is matched by a new entry. Default is false. True will override at any time.
-3. (int) - Length of status log. Default is 100.
+1. Status Codes (array) - An array of status codes. See the format below.
+2. Replace Flag (bool) - Whether to allow existing status codes to be replaced or not when the code is matched by a new entry. Default is false. True will override at any time.
+3. Log Size (int) - Length of status log. Default is 100.
 
 It is recommended that you create a single class instance and load it into your other objects as a depedency. For example:
 
@@ -114,9 +115,35 @@ It is recommended that you create a single class instance and load it into your 
 if (!isset($mpo_secure)) { $mpo_secure  = new \mpc\mpc_secure($mpo_errors); }
 ```
 
-array $pList=NULL, bool $pReplace=false, int $pCache = 100
-
 ## Usage
+
+The use of namespaces or other unique identifiers to create unique strings for locking is strongly encouraged.
+
+Examples:
+
+- mpo_parts::main_body
+- mpo_menus::main_nav::home_link
+
+Autogeneration examples:
+
+- `get_class().'::'.someProp`
+- `get_class().'::'.__METHOD__`
+- `get_class().'_'.self::$iCount++` (for multiple instances)
+
+For security add a hash of some sort that is always used for all calls by a given class. This prevents others without access to private properties from overwriting any locks. Examples of PHP hash generators:
+
+- `md5(get_class())`
+- `md5(rand())`
+- `uniqid()`
+- `bin2hex(random_bytes(16))`
+
+Since these will only persist for as long as it takes for PHP to generate and send out an HTTP response, they do not need to be overly secure. There are only milliseconds to guess the hash before it is gone.
+
+MoosePlum classes define the following property on instantiation to ensure unique names.
+
+```
+$this->classRef = bin2hex(random_bytes(8)).'::'.get_class();
+```
 
 ### The Status Code Array
 
@@ -171,15 +198,15 @@ A `get()` call will return the last element recorded as an array with the above 
 
 Add an entry to the status log. See above for the structure of the status log.
 
+```
+public setStatus(string code, ?string source) : bool
+```
+
 If the status log exceeds maximum size, remove the oldest element.
 
 If a source is not specified, log as 'source not specified'.
 
 Return false is the status code does not exist in the status code array.
-
-```
-public setStatus(string code, ?string source) : bool
-```
 
 #### getStatus
 
