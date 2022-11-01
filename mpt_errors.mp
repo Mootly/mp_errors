@@ -1,6 +1,4 @@
 <?php
-$fileList = glob('./*');
-echo '<pre>', var_export($fileList),'</pre>';
 require_once './src/mpi_errors.php';
 require_once './src/mpc_errors.php';
 $mpo_errors = new \mpc\mpc_errors();
@@ -49,7 +47,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 
 <p>Not fancy, but found plenty of edge cases.</p>
 
-<p>Last updated: JUly 1, 2022</p>
+<p>Last updated: October 27, 2022</p>
 
 <!-- ***** TABLE OF CONTENTS ***** -->
 

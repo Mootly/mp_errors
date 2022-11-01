@@ -63,7 +63,7 @@ class mpc_errors implements mpi_errors {
   * @param  int     $pCache   - Number of status records to store.
   * @return bool
   */
-  public function __construct(array $pList=NULL, bool $pReplace=false, int $pCache = 100) {
+  public function __construct(array $pList=null, bool $pReplace=false, int $pCache = 100) {
 # Constructor does not return values.
 # Remember to check getStatus for errors
     $this->iName    = get_class().'_'.self::$iCount++;
@@ -84,7 +84,7 @@ class mpc_errors implements mpi_errors {
 #
 # *** BEGIN setStatus --------------------------------------------------------- *
 # If the status code is in error, call self to record mpe_null error
-  public function setStatus(string $pCode, string $pSource=NULL) : bool {
+  public function setStatus(string $pCode, string $pSource=null) : bool {
     $tMethod        = $this->iName.'::'.__METHOD__;
     if (!empty($this->status[$pCode])) {
       $this->response['success']        = ($pCode == 'none') ? true : false;
@@ -118,7 +118,7 @@ class mpc_errors implements mpi_errors {
 # *** END - getStatusCount ---------------------------------------------------- *
 #
 # *** BEGIN addStatusCodes ---------------------------------------------------- *
-  public function addStatusCodes(array $pList=NULL, bool $pReplace=false) : bool {
+  public function addStatusCodes(array $pList=null, bool $pReplace=false) : bool {
     $tMethod        = $this->iName.'::'.__METHOD__;
     if (!empty($pList)) {
       foreach($pList as $tKey => $tVal) {
