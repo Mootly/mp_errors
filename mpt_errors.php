@@ -25,7 +25,8 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   echo '<pre>', $p_string , var_export($p_dataObj), '</pre>';
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <title>mpc_errors Test Page</title>
   <style type="text/css">
@@ -59,7 +60,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
   <li><a href="#dependencies">Dependencies</a></li>
   <li><a href="#fix">Unexpected Behaviors</a></li>
 </ul>
-</ol>
+<ol>
   <li><a href="#instantiate">Instantiate</a></li>
   <li><a href="#setStatus">setStatus</a></li>
   <li><a href="#getStatus">getStatus</a></li>
@@ -234,7 +235,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <pre>
 <?php
   $mpo_errors       = false;
-  $mpo_errors       = new \mpc\mpc_errors(NULL, false, 5);
+  $mpo_errors       = new \mpc\mpc_errors(null, false, 5);
   for ($x=0; $x<6; $x++) { $t_stat = $mpo_errors->setStatus('noob'); }
   printResults($mpo_errors);
   ?>
@@ -246,7 +247,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <pre>
 <?php
   $mpo_errors       = false;
-  try { $mpo_errors = new \mpc\mpc_errors(NULL, false, 'badval');
+  try { $mpo_errors = new \mpc\mpc_errors(null, false, 'badval');
   } catch(Throwable $e) { printError($e, 'Error 1: '); }
 ?>
 </pre>
@@ -257,7 +258,7 @@ function printVariables($p_dataObj, $p_string = 'Result: ') {
 <pre>
 <?php
   $mpo_errors       = false;
-  try { $mpo_errors = new \mpc\mpc_errors(NULL, false, -8);
+  try { $mpo_errors = new \mpc\mpc_errors(null, false, -8);
   } catch(Throwable $e) { printError($e, 'Error 1: '); }
   printResults($mpo_errors);
 ?>
