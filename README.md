@@ -36,7 +36,7 @@ The files in this set are as follows:
 | path                | description
 | ----------          | ----------
 | composer.json       | Yep, we are using [Composer](https://getcomposer.org).
-| LICENSE.md          | License notice [MIT](https://mit-license.org).
+| LICENSE.md          | License notice ( [MIT](https://mit-license.org) ).
 | README.md           | This document.
 | mpt_errors.php      | Local unit test file to make sure things work.
 | src/mpc_errors.php  | The class definition.
