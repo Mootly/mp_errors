@@ -15,7 +15,7 @@
   * @method bool              addStatusCodes(array, bool)
   *
   * @copyright 2017-2022 Mootly Obviate
-  * @package   mooseplum
+  * @package   mooseplum/php_classes/errors
   * @version   1.0.0
   * --- Revision History ------------------------------------------------------ *
   * 2022-07-01 | New PHP 8.0 version ready.

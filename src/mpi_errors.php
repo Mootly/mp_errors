@@ -23,7 +23,7 @@
   * calling methods - $tMethod      = $this->iName.'::'.__METHOD__;
   *
   * @copyright 2021-2022 Mootly Obviate
-  * @package   mooseplum
+  * @package   mooseplum/php_classes/errors
   * @version   1.0.0
   * --- Revision History ------------------------------------------------------ *
   * 2022-07-01 | New PHP 8.0 version ready.
