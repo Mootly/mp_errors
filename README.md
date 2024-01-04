@@ -4,7 +4,8 @@ This is a standalone version of the error class used by MoosePlum, for those who
 
 This is for logging errors that are internal to the application and do not, and in most cases should not, generate system errors.
 
-**This is NOT a secure solution.**
+> [!WARNING]
+> **This is NOT a secure solution.**
 
 The error log is stored internally in an array that defaults to only storing the last 100 entries.
 
