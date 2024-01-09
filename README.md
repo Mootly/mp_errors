@@ -5,7 +5,7 @@ This is a standalone version of the error class used by MoosePlum, for those who
 This is for logging errors that are internal to the application and do not, and in most cases should not, generate system errors.
 
 > [!WARNING]
-> **This is NOT a secure solution.**
+> This is NOT a secure solution.
 
 The error log is stored internally in an array that defaults to only storing the last 100 entries.
 
@@ -30,7 +30,7 @@ The default namespace for this class is '`mpc`', which is short for 'MoosePlum C
 
 The default location for this class definition should be your vendor library. For inclusion with other MoosePlum stuff that would be `/_lib/mootly/mp_errors/`.
 
-## Contents
+## Assets
 
 The files in this set are as follows:
 
@@ -100,7 +100,7 @@ require_once "<site root>/<vendor lib>/autoload.php";
 
 That should be all your need to do to get it up and running.
 
-## Instantiation
+## Configuration
 
 If you are using autoloading, the recommended method for instantiation is as follows:
 
