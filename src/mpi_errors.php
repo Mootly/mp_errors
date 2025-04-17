@@ -22,10 +22,11 @@
   * __construct()   - $this->iName  = get_class().'_'.self::$iCount++;
   * calling methods - $tMethod      = $this->iName.'::'.__METHOD__;
   *
-  * @copyright 2021-2022 Mootly Obviate
+  * @copyright 2021-2025 Mootly Obviate
   * @package   mooseplum/php_classes/errors
-  * @version   1.0.0
+  * @version   1.0.1
   * --- Revision History ------------------------------------------------------ *
+  * 2025-04-17 | Interface updated for PHP 8.4 deprecrations re: implicit null.
   * 2022-07-01 | New PHP 8.0 version ready.
   * --------------------------------------------------------------------------- */
   namespace mpc;
@@ -87,4 +88,4 @@
   public function addStatusCodes(array $pList, bool $pReplace) : bool;
 # *** END - addStatusCodes ---------------------------------------------------- *
 }
-// End mpc_paths -------------------------------------------------------------- *
+// End mpi_errors ------------------------------------------------------------- *

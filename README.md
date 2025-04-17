@@ -1,5 +1,7 @@
 # MoosePlum Error Management Class
 
+Repo: [Mootly/mp_errors](https://github.com/Mootly/mp_errors)
+
 This is a standalone version of the error class used by MoosePlum, for those who want a really simple in-application error logger for their PHP apps.
 
 This is for logging errors that are internal to the application and do not, and in most cases should not, generate system errors.
@@ -34,14 +36,15 @@ The default location for this class definition should be your vendor library. Fo
 
 The files in this set are as follows:
 
-| path                | description
-| ----------          | ----------
-| composer.json       | Yep, we are using [Composer](https://getcomposer.org).
-| LICENSE.md          | License notice ( [MIT](https://mit-license.org) ).
-| README.md           | This document.
-| mpt_errors.php      | Local unit test file to make sure things work.
-| src/mpc_errors.php  | The class definition.
-| src/mpi_errors.php  | The interface for the class.
+| path               | description                                            |
+| ------------------ | ------------------------------------------------------ |
+| composer.json      | Yep, we are using [Composer](https://getcomposer.org). |
+| CHAMGELOG.md       | The changelog for this utility.                        |
+| LICENSE.md         | License notice ( [MIT](https://mit-license.org) ).     |
+| README.md          | This document.                                         |
+| mpt_errors.php     | Local unit test file to make sure things work.         |
+| src/mpc_errors.php | The class definition.                                  |
+| src/mpi_errors.php | The interface for the class.                           |
 
 ## Installation
 
